@@ -1,3 +1,5 @@
+#This script tarts and stops Jenkins using systemctl
+# It fetches the list of jobs, checks the status of each job's builds, and prints the results.
 import requests
 import os
 import json
@@ -83,7 +85,14 @@ else:
     print(f"Failed to fetch jobs. Status Code: {response.status_code}")
     print("Response:", response.text)
 
+stop_jenkins = subprocess.run(["systemctl", "stop", service_name], capture_output=True, text=True) # Run the command to start the service
 
+# Check if the service stopped successfullyS
+if stop_jenkins.returncode == 0:
+    print(f"{service_name} stopped successfully")
+else:
+    print(f"Failed to stop {service_name}")
+    print(result.stderr)
 
 #Generate Output numbers
 
