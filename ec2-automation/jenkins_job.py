@@ -50,7 +50,7 @@ if response.status_code == 200:
 
         try:
             buildnumberJson = json.loads(response_job.text) #json.loads() function is used to parse a JSON string and convert it into a Python data structure (usually a dictionary or a list).
-    
+           
         except:
             print ("Failed to parse json")
             exit(1)
@@ -59,8 +59,8 @@ if response.status_code == 200:
             print(f"No builds found for job: {job_name}")
             continue  #continue statement is used inside loops (for or while) to skip the current iteration and move to the next one immediately.
 
-        totalbuilds = buildnumberJson["lastBuild"] #   totalbuilds = buildnumberJson["lastBuild"] # Extract the 'lastBuild' dictionary
-        runs = totalbuilds["number"] # Extract the 'number' key from the 'lastBuild' dictionary
+        runs = buildnumberJson["lastBuild"]["number"] # Here, we have a JSON string with a nested structure. We parse it into a dictionary and then access elements within the nested structure using multiple keys.
+        
     
     
         totalsuccess = totalfailure = totalmissing = 0
