@@ -46,7 +46,7 @@ if response.status_code == 200:
         
         #Use the 'auth' parameter to send requests with HTTP Basic Auth:
         #Accessing the Job page to get the latest Build ran.
-        response_job = requests.post(f"{job_url}api/json", auth = (username, password),verify=False) #Verify=False is used to ignore SSL certificate warnings
+        response_job = requests.get(f"{job_url}api/json", auth = (username, password),verify=False) #Verify=False is used to ignore SSL certificate warnings
 
         try:
             buildnumberJson = json.loads(response_job.text) #json.loads() function is used to parse a JSON string and convert it into a Python data structure (usually a dictionary or a list).
