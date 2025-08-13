@@ -4,8 +4,7 @@ import boto3
 s3 = boto3.client("s3")  # Needs credentials
 
 #Input for bucket name and region
-bucketName = str(input("Enter Bucket Name: "))
-bucketName = bucketName.strip()  # Remove any leading/trailing whitespace
+bucketName = str(input("Enter Bucket Name: ")).strip()  # Remove any leading/trailing whitespace
 bucketRegion = str(input("Enter AWS Region: "))
 
 #Create a bucket

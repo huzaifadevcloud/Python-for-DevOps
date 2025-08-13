@@ -13,5 +13,7 @@ def attach_policy():
         return response
     except Exception as e:
         print(f"Error attaching policy: {e}")
+
+
 attach_policy()
 print(f"Policy {policy_arn} attached successfully to user {user_name}.")
