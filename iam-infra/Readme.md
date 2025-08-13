@@ -11,7 +11,8 @@ This documentation outlines the process for managing IAM users, policies, and gr
 ## 1. **User Management**
 
 ### **Create IAM User**
-- Create an IAM user with:
+- Create an IAM user with:git
+
   - Username
   - Login password
   - Access key & secret key

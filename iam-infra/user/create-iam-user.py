@@ -33,7 +33,7 @@ def create_iam_user(user_name):
         iam.create_user(UserName=user_name)
         # Create a login profile for the user with the generated password
         iam.create_login_profile(UserName=user_name, Password=password, PasswordResetRequired=True)
-        print(f"IAM user '{user_name}' and '{password}'created successfully.")
+        print(f"IAM user '{user_name}' and '{password}'created successfully to use in AWS Web.")
         update_password_policy()  # Update the password policy to enforce strong passwords
         lst_iam_users()  # List all IAM users
     except iam.exceptions.EntityAlreadyExistsException:
@@ -51,39 +51,6 @@ def create_access_key(user_name):
         print(f"Secret Access Key: {access_key['SecretAccessKey']}")
     except Exception as e:
         print(f"An error occurred while creating access key: {e}")
-
-# Function to delete an IAM user
-# This function deletes an IAM user if it exists
-# It handles exceptions if the user does not exist or if there is an error during deletion
-def delete_iam_user(user_name):
-    # Wait before deleting the user
-    print("Waiting 30 seconds before deleting the IAM user...")
-    time.sleep(30)
-    # Delete the login profile
-    try:
-        iam.delete_login_profile(UserName=user_name)  
-        print(f"Login profile for user '{user_name}' deleted successfully.")
-    except iam.exceptions.NoSuchEntityException:
-        print(f"Login profile for user '{user_name}' does not exist.")
-
-    # Delete the key associated with the user
-    try:
-        access_keys = iam.list_access_keys(UserName=user_name)['AccessKeyMetadata']
-        for key in access_keys:
-            iam.delete_access_key(UserName=user_name, AccessKeyId=key['AccessKeyId']) # AccessKeyMetadata is a list of dictionaries containing information which is stored in key during iteration thats why using key['AccessKeyId'] to get access key
-            print(f"Access keys for user '{user_name}' deleted successfully.")
-    except iam.exceptions.NoSuchEntityException:
-        print(f"No access keys found for user '{user_name}'.")
-        
-    # Finally, delete the user
-    try:
-        iam.delete_user(UserName=user_name)
-        print(f"IAM user '{user_name}' deleted successfully.")
-    except iam.exceptions.NoSuchEntityException:
-        print(f"User '{user_name}' does not exist.")
-    
-    # List all IAM users after deletion 
-    lst_iam_users()  
 
 # Function to update the password policy
 def update_password_policy():
@@ -105,4 +72,3 @@ def update_password_policy():
 
 create_iam_user(userName)
 create_access_key(userName)  # Create an access key for the user
-delete_iam_user(userName)  # Delete the IAM user

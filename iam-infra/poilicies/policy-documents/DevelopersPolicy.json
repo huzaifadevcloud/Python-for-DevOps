@@ -1,0 +1,50 @@
+{
+  "Version": "2012-10-17",
+  "Id": "DeveloperPolicy",
+  "Statement": [
+    {
+      "Sid": "AllowDeveloperActions",
+      "Effect": "Allow",
+      "Action": [
+        "s3:CreateBucket",
+        "s3:DeleteBucket",
+        "s3:ListBucket",
+        "s3:GetBucketLocation",
+        "s3:PutBucketPolicy",
+        "s3:PutObject",
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::*/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:RunInstances",
+        "ec2:TerminateInstances",
+        "ec2:DescribeInstances",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:DescribeInstanceStatus",
+        "ec2:CreateVpc",
+        "ec2:DeleteVpc",
+        "ec2:CreateSubnet",
+        "ec2:DeleteSubnet",
+        "ec2:CreateInternetGateway",
+        "ec2:AttachInternetGateway",
+        "ec2:DeleteInternetGateway",
+        "ec2:CreateNatGateway",
+        "ec2:DeleteNatGateway",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeNatGateways"
+      ],
+      "Resource": "arn:aws:ec2:::*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:InstanceType": "t2.medium"
+        }
+      }
+    }
+  ]
+}
