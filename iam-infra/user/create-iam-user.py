@@ -59,7 +59,7 @@ def update_password_policy():
         iam.update_account_password_policy(
         MinimumPasswordLength=12,
         RequireSymbols=True,
-        MFAEnabled=True, # Multi-Factor Authentication is required
+        MFAEnabled=False, # Multi-Factor Authentication is required
         RequireNumbers=True,
         RequireUppercaseCharacters=True,
         RequireLowercaseCharacters=True,
