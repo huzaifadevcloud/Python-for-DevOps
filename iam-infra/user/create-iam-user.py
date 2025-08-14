@@ -32,14 +32,13 @@ def create_iam_user(user_name):
     try:
         iam.create_user(UserName=user_name)
         # Create a login profile for the user with the generated password
-        iam.create_login_profile(UserName=user_name, Password=password, PasswordResetRequired=True)
+        iam.create_login_profile(UserName=user_name, Password=password, PasswordResetRequired=False)
         print(f"IAM user '{user_name}' and '{password}'created successfully to use in AWS Web.")
         update_password_policy()  # Update the password policy to enforce strong passwords
         lst_iam_users()  # List all IAM users
     except iam.exceptions.EntityAlreadyExistsException:
         print(f"User '{user_name}' already exists.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    
 
 # Function to create an access key for the IAM user *(for CLI)
 def create_access_key(user_name):
@@ -60,6 +59,7 @@ def update_password_policy():
         iam.update_account_password_policy(
         MinimumPasswordLength=12,
         RequireSymbols=True,
+        MFAEnabled=True, # Multi-Factor Authentication is required
         RequireNumbers=True,
         RequireUppercaseCharacters=True,
         RequireLowercaseCharacters=True,
