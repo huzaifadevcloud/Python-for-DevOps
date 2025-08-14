@@ -5,4 +5,7 @@ iam = boto3.client('iam')
 
 response = iam.list_users()
 users = response['Users']
-print(f"List of IAM Users:{users[0]['UserName']}")
+
+#print=(f"Iam Users:{users[0]['UserName']}")
+for user in users:
+    print(user['UserName'])
