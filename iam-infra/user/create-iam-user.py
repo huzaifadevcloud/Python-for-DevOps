@@ -72,3 +72,4 @@ def update_password_policy():
 
 create_iam_user(userName)
 create_access_key(userName)  # Create an access key for the user
+update_password_policy()  # Update the password policy
